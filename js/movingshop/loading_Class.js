@@ -266,9 +266,9 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
         rect.colorChange()
         var rgb = Math.round(rect.rgb)
         let coefficient = rgb/255
-        let r =  Math.floor(rgb * (60 + 40 * rgb / 255) / 100 - 146*(1-coefficient))
-        let g =  Math.floor(rgb * (80 + 20 * rgb / 255) / 100 + 1055*(1-coefficient))
-        let b =  Math.floor(rgb - 1153*(1-coefficient))
+        let r =  Math.floor(rgb * (60 + 40 * rgb / 255) / 100 - 1124*Math.pow(1-coefficient,2))
+        let g =  Math.floor(rgb * (80 + 20 * rgb / 255) / 100 + 532*Math.pow(1-coefficient,2))
+        let b =  Math.floor(rgb - 3786*Math.pow(1-coefficient,2))
         // console.log('rgba(' + r + ',' + g + ',' + b + ',' + rect.alpha + ')')
         // console.log(1-coefficient)
 
@@ -294,7 +294,7 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
       doPerspective(rect)
       // var rgb = Math.round(rect.rgb);
       if (rect.visible) {
-        ctx.fillStyle = 'rgba(255,0,0,' + rect.alpha + ')'
+        ctx.fillStyle = 'rgba(54, 138, 55,' + rect.alpha + ')'
         ctx.fillRect(rect.x, rect.y, rect.width * rect.scale, rect.height * rect.scale)
         if (rect.isImage) {
           try {ctx.drawImage(image, Math.floor(rect._xpos + 50), Math.floor(rect._ypos + 50), 4, 4, Math.floor(rect.x), Math.floor(rect.y), Math.floor(rect.width * rect.scale), Math.floor(rect.height * rect.scale))}
@@ -461,8 +461,8 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
         var rgb = 255 - Math.floor(120 * Math.pow(_r / r, 2))
         rect.rgb = rgb
         rect.rgbStart = rgb
-        rect.rgbMax = rgb + Math.floor(10 * Math.pow(_r / r, 2))
-        rect.rgbMix = rgb - Math.floor(10 * Math.pow(_r / r, 2))
+        rect.rgbMax = rgb + Math.floor(40 * Math.pow(_r / r, 2))
+        rect.rgbMix = rgb - Math.floor(40 * Math.pow(_r / r, 2))
       }
     }
   }
