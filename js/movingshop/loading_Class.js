@@ -259,22 +259,22 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
   function render () {
     ctx.clearRect(0, 0, width, height)
     for (var i = xIndexStart; i < xIndexEnd; i++) {
-      console.log(i)
+      // console.log(i)
       for (var j = yIndexStart; j < yIndexEnd; j++) {
-        console.log(j)
+        // console.log(j)
         var rect = bgRectA[i][j]
         rect.colorChange()
         var rgb = Math.round(rect.rgb)
         let coefficient = rgb/255
-        let r =  Math.floor(rgb * (60 + 40 * rgb / 255) / 100 - 27*(1-coefficient))
-        let g =  Math.floor(rgb * (80 + 20 * rgb / 255) / 100 + 11*(1-coefficient))
-        let b =  Math.floor(rgb - 91*(1-coefficient))
-        console.log('rgba(' + r + ',' + g + ',' + b + ',' + rect.alpha + ')')
-        console.log(1-coefficient)
+        let r =  Math.floor(rgb * (60 + 40 * rgb / 255) / 100 - 146*(1-coefficient))
+        let g =  Math.floor(rgb * (80 + 20 * rgb / 255) / 100 + 1055*(1-coefficient))
+        let b =  Math.floor(rgb - 1153*(1-coefficient))
+        // console.log('rgba(' + r + ',' + g + ',' + b + ',' + rect.alpha + ')')
+        // console.log(1-coefficient)
 
-        ctx.font="30px Verdana";
-        ctx.fillStyle='red';
-        ctx.fillText(`${i},${j}`,rect.x - (2700 - width) / 2, rect.y - (1500 - height) / 2);
+        // ctx.font="30px Verdana";
+        // ctx.fillStyle='red';
+        // ctx.fillText(`${i},${j}`,rect.x - (2700 - width) / 2, rect.y - (1500 - height) / 2);
 
         // 200, 207, 214  //6
         // 181, 216, 150
@@ -285,7 +285,7 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
       }
     }
     // console.log(rect.alpha);
-    // requestId = window.requestAFrame(render)
+    requestId = window.requestAFrame(render)
 
     for (var i = 0; i < logoRectA.length; i++) {
       var rect = logoRectA[i]
