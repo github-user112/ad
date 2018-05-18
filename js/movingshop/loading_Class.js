@@ -4,8 +4,8 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
     // document.createElement('canvas').getContext('2d');
 
   var canvas = $('#' + canvas_id)
-  var cxt = canvas[0].getContext('2d')
-  // cxt.globalAlpha = 1;
+  var ctx = canvas[0].getContext('2d')
+  // ctx.globalAlpha = 1;
   var btn = canvas.parent().children('#logo_btn_box')
   var btnImg = btn.children('#logo_btn_t_box')
 
@@ -257,19 +257,35 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
   }
 
   function render () {
-    cxt.clearRect(0, 0, width, height)
+    ctx.clearRect(0, 0, width, height)
     for (var i = xIndexStart; i < xIndexEnd; i++) {
+      console.log(i)
       for (var j = yIndexStart; j < yIndexEnd; j++) {
+        console.log(j)
         var rect = bgRectA[i][j]
         rect.colorChange()
         var rgb = Math.round(rect.rgb)
+        let coefficient = rgb/255
+        let r =  Math.floor(rgb * (60 + 40 * rgb / 255) / 100 - 27*(1-coefficient))
+        let g =  Math.floor(rgb * (80 + 20 * rgb / 255) / 100 + 11*(1-coefficient))
+        let b =  Math.floor(rgb - 91*(1-coefficient))
+        console.log('rgba(' + r + ',' + g + ',' + b + ',' + rect.alpha + ')')
+        console.log(1-coefficient)
 
-        cxt.fillStyle = 'rgba(' + Math.floor(rgb * (60 + 40 * rgb / 255) / 100) + ',' + Math.floor(rgb * (80 + 20 * rgb / 255) / 100) + ',' + rgb + ',' + rect.alpha + ')'
-        cxt.fillRect(rect.x - (2700 - width) / 2, rect.y - (1500 - height) / 2, rect.width, rect.height)
+        ctx.font="30px Verdana";
+        ctx.fillStyle='red';
+        ctx.fillText(`${i},${j}`,rect.x - (2700 - width) / 2, rect.y - (1500 - height) / 2);
+
+        // 200, 207, 214  //6
+        // 181, 216, 150
+        // 19,-9,64
+        // ctx.fillStyle = 'rgba(' + Math.floor(rgb * (60 + 40 * rgb / 255) / 100) + ',' + Math.floor(rgb * (80 + 20 * rgb / 255) / 100) + ',' + rgb + ',' + rect.alpha + ')'
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + rect.alpha + ')'
+        ctx.fillRect(rect.x - (2700 - width) / 2, rect.y - (1500 - height) / 2, rect.width, rect.height)
       }
     }
     // console.log(rect.alpha);
-    requestId = window.requestAFrame(render)
+    // requestId = window.requestAFrame(render)
 
     for (var i = 0; i < logoRectA.length; i++) {
       var rect = logoRectA[i]
@@ -278,10 +294,10 @@ function loading_Class (canvas_id, hideCallBack, number = 27) {
       doPerspective(rect)
       // var rgb = Math.round(rect.rgb);
       if (rect.visible) {
-        cxt.fillStyle = 'rgba(255,0,0,' + rect.alpha + ')'
-        cxt.fillRect(rect.x, rect.y, rect.width * rect.scale, rect.height * rect.scale)
+        ctx.fillStyle = 'rgba(255,0,0,' + rect.alpha + ')'
+        ctx.fillRect(rect.x, rect.y, rect.width * rect.scale, rect.height * rect.scale)
         if (rect.isImage) {
-          try {cxt.drawImage(image, Math.floor(rect._xpos + 50), Math.floor(rect._ypos + 50), 4, 4, Math.floor(rect.x), Math.floor(rect.y), Math.floor(rect.width * rect.scale), Math.floor(rect.height * rect.scale))}
+          try {ctx.drawImage(image, Math.floor(rect._xpos + 50), Math.floor(rect._ypos + 50), 4, 4, Math.floor(rect.x), Math.floor(rect.y), Math.floor(rect.width * rect.scale), Math.floor(rect.height * rect.scale))}
           catch (e) {}
 
         }
