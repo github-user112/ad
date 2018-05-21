@@ -1,5 +1,6 @@
-/.cache
-/node_modules
-/dist
-/.vscode
+node_modules/
+.cache
+dist/
+yarn*.log
 /.idea
+/.vscode

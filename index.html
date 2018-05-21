@@ -1,170 +1,51 @@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<!--[if lt IE 9]>
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-<title>未来广告</title>
-<![endif]-->
-<!--[if IE 9]><title>未来广告1234</title>
-<![endif]-->
-<title>未来广告</title>
-<meta name="description"content="作为中央电视台所属唯一全资的广告公司，CCTV未来广告公司是中央电视台探索专业频道经营、面向市场多元化经营的重要平台，公司经营收入占CCTV年度总收入约20%。公司独家代理经营着众多优质和最新央视媒体资源：CCTV-5体育频道、CCTV-8电视剧频道、CCTV-12社会与法频道，CCTV-1《东方时空》、《今日说法》栏目，央视国际网站等。"> 
-<script type="text/javascript" src="js/html5.js"></script> 
-
-<!-- layout css -->
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-
-
-<!--</script>-->
-<!--<script src="js/movingshop/indexInit.js"></script>
-<script src="js/movingshop/cctv5Init.js"></script>
-<script src="js/movingshop/mediaInit.js"></script>
-<script src="js/movingshop/aboutInit.js"></script>
-<script src="js/movingshop/caseInit.js"></script>
-<script src="js/movingshop/downloadInit.js"></script>-->
-
-<script src="js/jquery-latest.js"></script>
-<!-- <script src="js/movingshop/ball3D.js"></script> -->
-<!-- <script src="js/movingshop/logoRotate.js"></script> -->
-<!-- <script src="js/movingshop/loading_bg.js"></script> -->
-<script src="js/movingshop/loading_Class.js"></script>
-<!--<script src="js/jquery-ui.min.js"></script>-->
-<!--<link href="js/selecter/jquery.fs.selecter.css" rel="stylesheet" type="text/css" />
-<script src="js/selecter/jquery.fs.selecter.min.js"></script>-->
-
-<script src="js/TweenMax.min.js"></script>
-<script src="js/TimelineMax.min.js"></script>
-<!--<script type="text/javascript" src= "js/plugins/CSSPlugin.min.js" ></script>
-<script src="js/plugins/CSSPlugin.min.js"></script>
-<script src="js/customscrollbar/jquery.mousewheel.min.js"></script>
-<script src="js/customscrollbar/jquery.mCustomScrollbar.min.js"></script>-->
-<!--<link href="js/customscrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />-->
-
-<!-- movingshop -->
-<!--<script src="js/movingshop/carouselClass.js"></script>-->
-
-<!-- Load player theme -->
-<!--<link rel="stylesheet" href="js/projekktor/theme/maccaco/projekktor.style.css" type="text/css" media="screen" />-->
-<!-- load projekktor -->
-<!--<script type="text/javascript" src="js/projekktor/projekktor-1.2.38r332.min.js"></script>-->
-
-
-
-<script type="text/javascript">
-
-
-  // var logo = new Image(); //创建一个Image对象，实现图片的预下载
-  // logo.src = 'images/logo.png';
-  // console.log(logo.toString());
-  // var logo_bottom = new Image(); //创建一个Image对象，实现图片的预下载
-  // logo_bottom.src = 'images/t_bottom.png';
-$(document).ready(function(){
-
-  
-  
-  loadImage('images/logo.png',showLoading)
-  function loadImage(url, callback) {
-    var img = new Image(); //创建一个Image对象，实现图片的预下载
-    img.src = url;
-     
-    if(img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数
-        callback.call(img);
-        return; // 直接返回，不用再处理onload事件
-    }
-    img.onload = function () { //图片下载完毕时异步调用callback函数。
-        callback.call(img);//将回调函数的this替换为Image对象
-    };
-  };
-
-  function showLoading()
-  {
-   
-    try{  
-
-      // document.createElement('canvas').getContext('2d');  
-      var loading = new loading_Class('myCanvas',allStart);
-      loading.start();
-    }catch(e){
-      function  showPage() {
-
-        $('#loading_box').remove();
-        allStart();
-      }
-      function showBtn()
-      {
-        $('#loading_box').css({'background':'#fff url(images/bg.png) center center'});
-        $('#logo_btn_t_box').show();
-        TweenMax.from($('#logo_btn_t_box'),1,{y:"+60",alpha:0,ease:Strong.easeOut,delay:1});
-        TweenMax.to($('#loading_btn'),.75,{y:"+=20",alpha:1,ease:Strong.easeOut});
-        TweenMax.fromTo($('#loading_btn div'),1,{borderColor:"#858585"},{borderColor:"#ffffff",ease:Linear.easeNone,repeat:-1,yoyo:true});
-        TweenMax.to($('#loading_btn_line_0'),1,{left:5,top:5,ease:Strong.easeInOut,repeat:-1,yoyo:true});
-        TweenMax.to($('#loading_btn_line_1'),1,{left:77,top:5,ease:Strong.easeInOut,repeat:-1,yoyo:true});
-        TweenMax.to($('#loading_btn_line_2'),1,{left:5,top:15,ease:Strong.easeInOut,repeat:-1,yoyo:true});
-        TweenMax.to($('#loading_btn_line_3'),1,{left:77,top:15,ease:Strong.easeInOut,repeat:-1,yoyo:true});
-
-        $('#logo_btn_box').bind('click',showPage);
-
-        $(window).resize(function(){
-          resizeBtn();
-        });
-        resizeBtn();
-        function resizeBtn()
-        {
-          var cw = $(window).width();
-          var ch = $(window).height();
-          cw = Math.ceil(cw);
-          ch = Math.ceil(ch);
-
-          width = Math.ceil(cw);
-          height = Math.ceil(ch);
-
-          vpX = Math.ceil(width/ 2);
-          vpY = Math.ceil(height / 2);
-
-          $('#logo_btn_box').css({'left':vpX - 50,'top':vpY - 50});
-        }
-      }
-      showBtn();
-    }
-    $('#page_mid_box').show();
-    
-  }
-
-  function allStart(){}
-
-});
-</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>未来广告</title>
+    <meta name="description" content="作为中央电视台所属唯一全资的广告公司，CCTV未来广告公司是中央电视台探索专业频道经营、面向市场多元化经营的重要平台，公司经营收入占CCTV年度总收入约20%。公司独家代理经营着众多优质和最新央视媒体资源：CCTV-5体育频道、CCTV-8电视剧频道、CCTV-12社会与法频道，CCTV-1《东方时空》、《今日说法》栏目，央视国际网站等。">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="./js/loading_Class.js"></script>
+    <script src="./js/TweenMax.min.js"></script>
+    <script src="./js/TimelineMax.min.js"></script>
+    <script type="text/javascript" src="./js/index.js">
+        // var logo = new Image(); //创建一个Image对象，实现图片的预下载
+        // logo.src = 'images/logo.png';
+        // console.log(logo.toString());
+        // var logo_bottom = new Image(); //创建一个Image对象，实现图片的预下载
+        // logo_bottom.src = 'images/t_bottom.png';
+        
+    </script>
 </head>
-<body style="zoom:1">
- <!-- loading -->
-<div id="loading_box" class="loading_box" style="z-index:99999; background:#fff;; position:fixed; top:0; left:0;" >
-  <canvas id="myCanvas"></canvas>
-  <img src="images/bd_logo1.jpg" width="0" height="0" />
-  <div  id="logo_btn_box" class="logo_btn_box" style="background:rgba(255,255,255,0);">
-    <div id="logo_btn_t_box" style="position: relative; left:6px; top:110px; width:88px; height:25px; background:url('images/btn0.png') no-repeat center center; display:none;"/>
-      <div id="loading_btn_line_0" style="border-top:1px solid #858585; border-left:1px solid #858585; position:absolute; left:0; top:0; width:4px; height:4px;"></div>
-      <div id="loading_btn_line_1" style="border-top:1px solid #858585; border-right:1px solid #858585; position:absolute; left:83px; top:0; width:4px; height:4px;"></div>
-      <div id="loading_btn_line_2" style="border-bottom:1px solid #858585; border-left:1px solid #858585; position:absolute; left:0; top:20px; width:4px; height:4px;"></div>
-      <div id="loading_btn_line_3" style="border-bottom:1px solid #858585; border-right:1px solid #858585; position:absolute; left:83px; top:20px; width:4px; height:4px;"></div>
-    </div>
 
-  </div>
-  <div id="loading_bottom_box" style="background:url('images/t_bottom.png') no-repeat center 0; height:90px; width:100%; position: fixed; bottom:0px; left:0;"></div>
-</div>
-<!-- 主体内容 -->
-<div id="page_mid_box" class="layer_box mid" style="display:none;" >
-  1234
-  <!--scene背景-->
-</div>
-<!-- 页面顶部 -->
-<!-- iooi -->
-<div id="nav_top_box" class="layer_box future-ad_top" style="background:url('images/bg0.jpg') top center; top:0px;" >
-  页面顶部
-</div>
+<body style="zoom:1">
+    <!-- loading -->
+    <div id="loading_box" class="loading_box" style="z-index:99999; background:#fff;; position:fixed; top:0; left:0;">
+        <canvas id="myCanvas"></canvas>
+        <img src="images/bd_logo1.jpg" width="0" height="0" />
+        <div id="logo_btn_box" class="logo_btn_box" style="background:rgba(255,255,255,0);">
+            <div id="logo_btn_t_box" style="position: relative; left:6px; top:110px; width:88px; height:25px; display:none;" />
+            <div id="loading_btn_line_0" style="border-top:1px solid #858585; border-left:1px solid #858585; position:absolute; left:0; top:0; width:4px; height:4px;"></div>
+            <div id="loading_btn_line_1" style="border-top:1px solid #858585; border-right:1px solid #858585; position:absolute; left:83px; top:0; width:4px; height:4px;"></div>
+            <div id="loading_btn_line_2" style="border-bottom:1px solid #858585; border-left:1px solid #858585; position:absolute; left:0; top:20px; width:4px; height:4px;"></div>
+            <div id="loading_btn_line_3" style="border-bottom:1px solid #858585; border-right:1px solid #858585; position:absolute; left:83px; top:20px; width:4px; height:4px;"></div>
+        </div>
+
+    </div>
+    <!--<div id="loading_bottom_box" style="background:url('images/t_bottom.png') no-repeat center 0; height:90px; width:100%; position: fixed; bottom:0px; left:0;"></div>-->
+    </div>
+    <!-- 主体内容 -->
+    <div id="page_mid_box" class="layer_box mid" style="display:none;">
+        1234
+        <!--scene背景-->
+    </div>
+    <!-- 页面顶部 -->
+    <!-- iooi -->
+    <!--<div id="nav_top_box" class="layer_box future-ad_top" style="background:url('images/bg0.jpg') top center; top:0px;" >-->
+    <!--页面顶部
+    </div>-->
 
 </body>
-</html>
 
+</html>

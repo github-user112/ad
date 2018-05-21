@@ -1,15 +1,17 @@
 {
-  "name": "www.future-ad.com",
+  "name": "parcel-demo1",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "dev": "npx parcel index.html -p 1234",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "yarn && npx parcel index.html",
+    "build": "npx parcel build"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "parcel": "^1.8.1"
-  }
+    "parcel-bundler": "^1.8.1"
+  },
+  "dependencies": {},
+  "keywords": [],
+  "author": "",
+  "description": ""
 }
